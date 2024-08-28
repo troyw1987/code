@@ -1,6 +1,6 @@
-/home/troy/code/memory_location_test/target/debug/deps/libmemory_location_test-3ae5998f055fc475.rmeta: src/main.rs Cargo.toml
+/home/troy/code/rust/memory_location_test/target/debug/deps/libmemory_location_test-3ae5998f055fc475.rmeta: src/main.rs Cargo.toml
 
-/home/troy/code/memory_location_test/target/debug/deps/memory_location_test-3ae5998f055fc475.d: src/main.rs Cargo.toml
+/home/troy/code/rust/memory_location_test/target/debug/deps/memory_location_test-3ae5998f055fc475.d: src/main.rs Cargo.toml
 
 src/main.rs:
 Cargo.toml:

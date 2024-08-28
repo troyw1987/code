@@ -15,5 +15,5 @@ fn main() {
         out = out + entry + "\n";
     }
 
-    println!("{out}\n");
+    println!("{out}");
 }
