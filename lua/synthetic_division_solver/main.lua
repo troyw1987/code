@@ -36,6 +36,10 @@ local function add_ones(str)
 			if i == 1 or not string_is_number(string.sub(str, i - 1, i - 1)) then
 				character = "1x"
 			end
+
+			if string.sub(str, i + 1, i + 1) ~= "^" then
+				character = character .. "^1"
+			end
 		end
 		output = output .. character
 	end
@@ -65,7 +69,7 @@ local function preparse_String(str)
 	print("removed any unknown characters")
 
 	str = add_ones(str)
-	print("added necesary ones before x")
+	print("added necesary coefficients and powers")
 
 	str = check_constant(str)
 	print("added necessary zeros at the end")
@@ -74,18 +78,53 @@ local function preparse_String(str)
 	return str
 end
 
+local function table_Iteration(str)
+	for i = 2, string.len(str) do
+		local char = string.sub(str, i, i)
+		if char == "+" or char == "-" then
+			local subsection = string.sub(str, 1, i - 1)
+			return subsection, string.sub(str, i, string.len(str))
+		else
+			if i == string.len(str) then
+				print("nigga")
+				return str, true
+			else
+				if str == "" then
+					return true, ""
+				end
+			end
+		end
+	end
+end
+
 local function split_String_Into_Table(str) -- input: "-1x^3+x^2+1x+5" -> {"-1x^3","+x^2","+1x","+5"}
 	print("splitting problem into table")
+	local output = {}
 
-	return str
+	repeat
+		local subsection, other = table_Iteration(str)
+
+		if other == true then
+			table.insert(output, subsection)
+			break
+		end
+
+		table.insert(output, subsection)
+
+		str = other
+	until table_Iteration(str) == true
+	return output
 end
 
 local function main()
 	setup_character_table()
 	problem = preparse_String(problem)
-	problem = split_String_Into_Table(problem)
+	local problem_table = split_String_Into_Table(problem)
 
-	print(problem)
+	print("\n\nTABLE:")
+	for i, v in pairs(problem_table) do
+		print(i, v)
+	end
 end
 
 main()
